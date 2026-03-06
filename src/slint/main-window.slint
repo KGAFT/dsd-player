@@ -1,0 +1,15 @@
+import { Button, Slider, ListView } from "std-widgets.slint";
+import {PlayerComponentSettings, PlayerComponent} from "player_component/player-component.slint";
+
+
+export component MainWindow inherits Window{
+    in-out property <PlayerComponentSettings> player_component_settings;
+    in-out property <[int]> current_component: [0];
+    HorizontalLayout {
+       for item in current_component: Rectangle{
+            if item == 0: PlayerComponent {
+                settings: player_component_settings;
+            }
+       }
+    }
+}

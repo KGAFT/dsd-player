@@ -1,0 +1,14 @@
+import { Button, Slider, ListView } from "std-widgets.slint";
+
+export struct PlayerComponentSettings{
+    title: string,
+}
+
+export component PlayerComponent inherits Rectangle {
+    in property <PlayerComponentSettings> settings;
+    HorizontalLayout {
+        Text {
+            text: settings.title;
+        }
+    }
+}
