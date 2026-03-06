@@ -1,14 +1,68 @@
 import { Button, Slider, ListView } from "std-widgets.slint";
 
-export struct PlayerComponentSettings{
+export struct TrackInfo{
     title: string,
+    artist: string,
+    album: string,
+    picture: image}
+
+export struct PlayerComponentSettings{
+    track_info: TrackInfo}
+
+component TrackInfo inherits Rectangle {
+    in property <TrackInfo> info;
+    VerticalLayout {
+        HorizontalLayout {
+            alignment: center;
+
+            Rectangle {
+                width: 500px;
+                height: 500px;
+                background: #282828;
+                border-radius: 16px;
+                Image {
+                    source: info.picture;
+                }
+            }
+        }
+
+        VerticalLayout {
+            spacing: 4px;
+            Text {
+                text: info.title;
+                color: #ffffff;
+                font-size: 20px;
+                font-weight: 700;
+                horizontal-alignment: center;
+                overflow: elide;
+            }
+
+            Text {
+                text: info.album;
+                color: #ffffff;
+                font-size: 14px;
+                horizontal-alignment: center;
+                overflow: elide;
+            }
+
+            Text {
+                text: info.artist;
+                color: #ffffff;
+                font-size: 12px;
+                horizontal-alignment: center;
+                overflow: elide;
+            }
+        }
+    }
 }
 
 export component PlayerComponent inherits Rectangle {
     in property <PlayerComponentSettings> settings;
-    HorizontalLayout {
-        Text {
-            text: settings.title;
+    VerticalLayout {
+        TrackInfo {
+            width: 500px;
+            height: 600px;
+            info: settings.track_info;
         }
     }
 }
